@@ -39,7 +39,7 @@ def main():
 
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
+    # print('Getting the upcoming 10 events')
     return service, now
    
 
@@ -73,6 +73,13 @@ def create_event(title, date, time):
 def insert_event(service, event):
     event = service.events().insert(calendarId='primary', body=event).execute()
     event_dict.update({event['summary']:event})
+
+
+
+def delete_event(service, event):
+    event_id = event['id']
+    service.events().delete(calendarId='primary', eventId=event_id).execute()
+    event_dict.pop(event['summary'])
 
 
 def write_data(slots_dict, file):

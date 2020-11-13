@@ -6,19 +6,18 @@ import textwrap
 # from requests import Request
 
 parser = argparse.ArgumentParser(prog='clinic',
-    # argument_default='-h',
     formatter_class=argparse.RawDescriptionHelpFormatter,
     description=textwrap.dedent('''\
         Welcome to WeThinkCode Code Clinic!
 
         A booking tool for Coding Clinic sessions
-        -----------------------------------------
-            I'm gonna write something useful here
-            also here
-            here too
-        _________________________________________
+        --------------------------------------------
+            view and edit your coding clinic slots
+            book slots created by other members
+            cancel or delete slots
+        ____________________________________________
         '''))
-parser.add_argument("-register", help="Register and authorise your credentials", action="store_true")
+parser.add_argument("-register", help="Authorise this app to give it permission to access your calendar", action="store_true")
 parser.add_argument("-login", help="Login if already registered in", action="store_true")
 parser.add_argument("-view_events", help="View all available events", action="store_true")
 parser.add_argument("-book_event", help="Book an events for your code clinic", action="store_true")
@@ -26,8 +25,10 @@ parser.add_argument("-delete_event", help="Delete an event ", action="store_true
 parser.add_argument("-create_event", help="create an event ", action="store_true")
 args = parser.parse_args()
 
-print(args)
+service,now = cal.main()
+# print(args)
 if args.view_events:
+    cal.get_event(service,now)
     print(textwrap.dedent('''
     These are your events:
 
@@ -41,21 +42,26 @@ if args.view_events:
     '''))
 
 if args.book_event:
-    print("hello")
+    print("hello") 
 
 elif args.create_event:
-    # service = cal.get_service()
+    # service,now = cal.main()
     title = input('Please enter the topic\n > ').strip()
     date = input('Please enter a date [yyyy-mm-dd]\n > ')
     time = input('Please enter a time [hh:mm]\n > ')
     event = cal.create_event(title,date,time)
     print('Event has been created')
+    cal.insert_event(service, event)
     print(event)
-    # cal.write_data(event,events_file.json)
-
 
 elif args.delete_event:
-    print("hello")
+    # service,now = cal.main()
+    event = cal.get_event(service, now)
+    cal.delete_event(service,event)
+
+
+# elif args.delete_event:
+    # print("hello")
 
 if __name__ == '__main__':
     pass
