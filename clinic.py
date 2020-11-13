@@ -2,8 +2,6 @@ import cal
 import argparse
 import textwrap
 
-# from cal import service
-# from requests import Request
 
 parser = argparse.ArgumentParser(prog='clinic',
     formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -28,21 +26,27 @@ args = parser.parse_args()
 service,now = cal.main()
 # print(args)
 if args.view_events:
+    print("The next ten events from your calendar:\n")
     cal.get_event(service,now)
+
+if args.book_event: 
     print(textwrap.dedent('''
-    These are your events:
+        Here are your slots:
 
-    +-------------+-------------+
-    | Booked      | Volunteered |
-    +-------------+-------------+
-    | row1column1 | row1column2 |
-    | row2column1 | row2column2 |
-    | row3column1 | row3column2 |
-    +-------------+-------------+
+    +----+-------------+-------------+
+    | no | available   | Booked      |
+    +----+-------------+-------------+
+    | 1. | row1column1 | row1column2 |
+    | 2. | row2column1 | row2column2 |
+    | 3. | row3column1 | row3column2 |
+    +----+-------------+-------------+
+
+    book avilable slots by no.(x):
+
+        clinic -book_event x
+
+    (Replace x with a number from the table.)
     '''))
-
-if args.book_event:
-    print("hello") 
 
 elif args.create_event:
     # service,now = cal.main()
@@ -52,7 +56,7 @@ elif args.create_event:
     event = cal.create_event(title,date,time)
     print('Event has been created')
     cal.insert_event(service, event)
-    print(event)
+    # print(event)
 
 elif args.delete_event:
     # service,now = cal.main()
@@ -60,8 +64,8 @@ elif args.delete_event:
     cal.delete_event(service,event)
 
 
-# elif args.delete_event:
-    # print("hello")
+# else:
+#     print("You")
 
 if __name__ == '__main__':
     pass
