@@ -35,5 +35,5 @@ def login(filename='secret.json'):
         print("Incorrect username or password")
 
 
-#register()
-login()
+register()
+# login()

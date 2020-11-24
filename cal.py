@@ -187,3 +187,5 @@ if __name__ == '__main__':
 # # print(service)
 
 # print(create_event('meet','2020-12-12',"17:00"))
+
+main()
