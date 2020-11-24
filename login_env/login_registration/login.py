@@ -1,5 +1,5 @@
-# import getpass
-import stdiomask
+import getpass
+# import stdiomask
 
 user = {}
 status = ""
@@ -21,7 +21,7 @@ def new_user():
         print(
     '''Password must be a minumum of 6 characters and a maximum of 8 characters.''')
 
-    createPass = stdiomask.getpass(prompt = "Enter password:")
+    createPass = getpass.getpass(prompt = "Enter password:")
     if len(createPass) < 6:
         print("Your password is too short.")
         newUser()
@@ -35,7 +35,7 @@ def new_user():
 
 def old_user():
     login = input("Enter login name:")
-    password = stdiomask.getpass(prompt = "Enter password:")
+    password = getpass.getpass(prompt = "Enter password:")
 
     if login in user and user[login] == password:
         print("\nLogin successful")
