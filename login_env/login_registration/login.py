@@ -12,7 +12,7 @@ def registration():
         newUser()
     
 
-def newUser():
+def new_user():
     createLogin = input("Create login name:")
 
     if createLogin in user:
@@ -33,7 +33,7 @@ def newUser():
         print("User created.\n")
 
 
-def oldUser():
+def old_user():
     login = input("Enter login name:")
     password = stdiomask.getpass(prompt = "Enter password:")
 
