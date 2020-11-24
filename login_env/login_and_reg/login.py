@@ -1,5 +1,5 @@
 import getpass
-import stdiomask
+# import stdiomask 
 
 user = {}
 status = ""
@@ -12,7 +12,7 @@ def registration():
         newUser()
     
 
-def newUser():
+def new_user():
     createLogin = input("Create login name:")
 
     if createLogin in user:
@@ -21,7 +21,7 @@ def newUser():
         print(
     '''Password must be a minumum of 6 characters and a maximum of 8 characters.''')
 
-    createPass = stdiomask.getpass(prompt = "Enter password:")
+    createPass = getpass.getpass(prompt = "Enter password:")
     if len(createPass) < 6:
         print("Your password is too short.")
         newUser()
@@ -33,9 +33,9 @@ def newUser():
         print("User created.\n")
 
 
-def oldUser():
+def old_user():
     login = input("Enter login name:")
-    password = stdiomask.getpass(prompt = "Enter password:")
+    password = getpass.getpass(prompt = "Enter password:")
 
     if login in user and user[login] == password:
         print("\nLogin successful")
