@@ -9,12 +9,24 @@ parser.add_argument("-login", help="Login if already registered in", action="sto
 args = parser.parse_args()
 
 
-
+#checking and executing the commandline arguments
 if args.register:
-    auth.register_user()
+    if not auth.token_exists():
+        auth.register_user()
+    else:
+        print(f"You are logged in as {auth.get_user()}")
+
 elif args.login:
-    auth.user_login()
-else:
+    if auth.token_exists() and not auth.token_valid():
+        auth.user_login()
+    elif not auth.token_exists():
+        print(f"\n\t\tUser is not registered\
+        \n\n\tcommand to register:   clinic -register\n")
+    else:
+        print(f"You are logged in as {auth.get_user()}")
+
+#code below will work if no argument is given
+else:#checking if token exists and it's still valid
     if not auth.token_exists():
         print(f"\n\t\tUser is not registered\
         \n\n\tcommand to register:   clinic -register\n")
@@ -23,3 +35,5 @@ else:
         print('\t\tcommand to login:     clinic -login\n')
     else:
         print('Welcome to code')
+        auth.get_event()
+
