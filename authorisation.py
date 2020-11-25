@@ -20,8 +20,8 @@ def token_exists():
 
 def get_creds():
     """gets credentials from the token"""
-    
-    with open('token.pickle', 'rb') as token:
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
             creds = pickle.load(token)
     return creds
 
@@ -82,7 +82,6 @@ def user_login():
 
     if creds.expired and creds.refresh_token:
         creds.refresh(Request())
-
 
     if user_details in json_object["user_infomation"]:
         print("Sucessful Login")

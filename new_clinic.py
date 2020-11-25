@@ -23,7 +23,3 @@ else:
         print('\t\tcommand to login:     clinic -login\n')
     else:
         print('Welcome to code')
-
-
-
-
