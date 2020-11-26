@@ -41,6 +41,17 @@ def token_valid():
     return False
 
 
+def read_json(filename='.secret.json'):
+    with open(filename,'r') as json_file: 
+        data = json.load(json_file)
+    return data
+
+
+def write_json(data, filename='.secret.json'):
+    with open(filename,'w') as f: 
+        json.dump(data, f, indent=4)
+
+
 def register_user():
     """Creates a new user"""
 
@@ -52,29 +63,28 @@ def register_user():
 
     if password == pass_comfirm:
         print(f"Welcome to Code Clinic {user}")
-        with open('secret.json') as json_file:
-                data = json.load(json_file)
+        data = read_json(filename='.secret.json')
         user_details = {
         "user_name" : user,
         "password" : password   
         }
         temp = data['user_infomation']
         temp.append(user_details)
+        write = write_json(data, filename='.secret.json')
 
-        with open('secret.json','w') as f: 
-            json.dump(data, f, indent=4)
 
         flow = InstalledAppFlow.from_client_secrets_file(
                     'credentials.json', SCOPES)
         creds = flow.run_local_server(port=0)
+
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
                 pickle.dump(creds, token)
 
     else:
         print("ERROR! Passwords don't match")
+        return password
    
-    
 
 def get_user():
     return getpass.getuser()
@@ -111,14 +121,14 @@ def user_login():
     user = getpass.getuser()
     print(f'Username: {user}')
     password = getpass.getpass(prompt='Password: ')
-
-    with open('secret.json') as json_file:
+    
+    with open('.secret.json') as json_file:
         json_object = json.load(json_file)
         
     user_details = {
         "user_name" : user,
         "password" : password   
-    }
+        }
 
     if creds.expired and creds.refresh_token:
         creds.refresh(Request())
