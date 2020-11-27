@@ -24,7 +24,7 @@ parser.add_argument("-create_event", help="create an event ", action="store_true
 args = parser.parse_args()
 
 service,now = cal.main()
-# print(args)
+
 if args.view_events:
     print("The next ten events from your calendar:\n")
     cal.get_event(service,now)
@@ -49,23 +49,17 @@ if args.book_event:
     '''))
 
 elif args.create_event:
-    # service,now = cal.main()
     title = input('Please enter the topic\n > ').strip()
     date = input('Please enter a date [yyyy-mm-dd]\n > ')
     time = input('Please enter a time [hh:mm]\n > ')
     event = cal.create_event(title,date,time)
     print('Event has been created')
     cal.insert_event(service, event)
-    # print(event)
 
 elif args.delete_event:
-    # service,now = cal.main()
     event = cal.get_event(service, now)
     cal.delete_event(service,event)
 
-
-# else:
-#     print("You")
 
 if __name__ == '__main__':
     pass
