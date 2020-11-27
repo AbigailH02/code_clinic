@@ -26,7 +26,8 @@ elif args.login:
         print(f"You are logged in as {auth.get_user()}")
 
 #code below will work if no argument is given
-else:#checking if token exists and it's still valid
+#checking if token exists and it's still valid
+else:
     if not auth.token_exists():
         print(f"\n\t\tUser is not registered\
         \n\n\tcommand to register:   clinic -register\n")
