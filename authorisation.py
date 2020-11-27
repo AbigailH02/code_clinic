@@ -17,7 +17,6 @@ def token_exists():
     """checks if the token file exists or not"""
 
     if os.path.exists('token.pickle'):
-        # print('token_exists')
         return True
     return False
 
@@ -36,7 +35,6 @@ def token_valid():
     """Checks if the token is valid(not expired)"""
 
     if os.path.exists('token.pickle') and creds and creds.valid:
-        # print('Token is valid')
         return True
     return False
 
