@@ -28,9 +28,10 @@ def getting_dates():
         y = (current + datetime.timedelta(days=x))
         y = y.isoformat() + 'Z'
         later.append(y)
-    return later
+    print(later)
+    return now, later
 
-def getting_events():
+def getting_events(now, later):
     page_token = None
     while True:
         events = service.events().list(calendarId='primary', pageToken=page_token, timeMin=now, timeMax=later[-1], singleEvents=True, orderBy="startTime").execute()
@@ -43,3 +44,8 @@ def getting_events():
         if not page_token:
             break
     return list_events 
+
+
+def run_prog():
+    now, later = getting_dates()
+    list_events = getting_events(now, later)
