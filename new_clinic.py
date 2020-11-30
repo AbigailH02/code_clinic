@@ -29,8 +29,10 @@ elif args.login:
 #checking if token exists and it's still valid
 else:
     if not auth.token_exists():
-        print(f"\n\t\tUser is not registered\
-        \n\n\tcommand to register:   clinic -register\n")
+        print(f"\n\t\tWelcome to Code Clinic!\n\t\tUser is not registered\
+        \n\n\tcommand to register: clinic -register\n\n\
+        command to login: clinic -login\n\
+        \n\tFor all navigation commands: clinic -help\n")
     elif auth.token_exists() and not auth.token_valid():
         print('\n\t\tUser not logged in')
         print('\t\tcommand to login:     clinic -login\n')
