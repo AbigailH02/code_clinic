@@ -9,15 +9,15 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 later = []
-credentials = 'client_secret.json'
+# credentials = 'client_secret.json'
 
-# scopes = ['https://www.googleapis.com/auth/calendar']
-# flow = InstalledAppFlow.from_client_secrets_file(credentials, scopes= scopes)
-# credentials = flow.run_local_server(port=0)
-# pickle.dump(credentials, open("token.pkl", "wb"))
-creds = pickle.load(open("token.pkl", "rb"))
+# # scopes = ['https://www.googleapis.com/auth/calendar']
+# # flow = InstalledAppFlow.from_client_secrets_file(credentials, scopes= scopes)
+# # credentials = flow.run_local_server(port=0)
+# # pickle.dump(credentials, open("token.pkl", "wb"))
+# creds = pickle.load(open("token.pkl", "rb"))
 
-service = build('calendar', 'v3', credentials=creds)
+# service = build('calendar', 'v3', credentials=creds)
 
 def getting_dates():
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
