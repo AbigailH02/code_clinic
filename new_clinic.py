@@ -17,13 +17,15 @@ if args.register:
         print(f"You are registered as {auth.get_user()}")
 
 elif args.login:
-    if auth.token_exists() and not auth.token_valid():
+    if auth.token_exists() and auth.token_expired():
         auth.user_login()
     elif not auth.token_exists():
         print(f"\n\t\tUser is not registered\
         \n\n\tcommand to register:   clinic -register\n")
     else:
-        print(f"You are logged in as {auth.get_user()}")
+        print(auth.token_exists)
+        print(auth.token_expired)
+        # print(f"You are logged in as {auth.get_user()}")
 
 #code below will work if no argument is given
 #checking if token exists and it's still valid

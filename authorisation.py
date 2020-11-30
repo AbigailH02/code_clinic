@@ -6,7 +6,7 @@ import json
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-import datetime
+import datetime, time
 from googleapiclient.discovery import build
 #we'll add deregister to delete the token
 
@@ -17,7 +17,10 @@ def token_exists():
     """checks if the token file exists or not"""
 
     if os.path.exists('token.pickle'):
+        print('token exists')
         return True
+    else:
+        print('token_exists')
     return False
 
 
@@ -128,7 +131,7 @@ def user_login():
         "password" : password   
         }
 
-    if creds.expired and creds.refresh_token:
+    if token_expired:
         creds.refresh(Request())
 
     if user_details in json_object["user_infomation"]:
@@ -136,4 +139,30 @@ def user_login():
     else:
         print("Incorrect username or password")
 
+
+
+
+def token_expired():
+    """gets the date and time of token file
+        token expires after one hour
+        if the expiry date of the token is greater than the current time
+        it is expired"""
+
+    created = os.path.getctime("token.pickle")
+    print("\ttoken Created: %s" % time.ctime(created))
+    token_exp = created + 3600
+    now = time.time()
+
+    if token_exp > now:
+        print('token expired')
+        return True
+    else:
+        print(f"\n\ttoken will expire on {time.ctime(token_exp)}")#token expires after 3600seconds(1hour)
+        return False
+
+
 creds = get_creds()
+token_expired()
+flow = InstalledAppFlow.from_client_secrets_file(
+                    '.secret.json', SCOPES)
+print(flow)
