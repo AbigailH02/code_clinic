@@ -26,7 +26,8 @@ def main():
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+            # creds.refresh(Request())
+            pass
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', SCOPES)
@@ -44,17 +45,26 @@ def main():
    
 
 def get_event(service,now):
-    events_result = service.events().list(calendarId='primary', timeMin=now,
+    events_result = service.events().list(calendarId='c_9d24nskh8p4rlsn3uak947rjjg@group.calendar.google.com', timeMin=now,
                                         maxResults=10, singleEvents=True,
                                         orderBy='startTime').execute()
-    events = events_result.get('items', [])
 
-    if not events:
-        print('No upcoming events found.')
-    for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        print(start, event['summary'])
+    calendar = service.calendars().get(calendarId='c_9d24nskh8p4rlsn3uak947rjjg@group.calendar.google.com').execute()
 
+    print (events_result)
+    # with open('calendar.json') as json_file:
+    #         data = json.load(json_file)
+    json_object = json.dumps(events_result, indent = 4)
+    with open('calendar.json','w') as f: 
+        f.write(json_object)
+
+    # calendar = events.get('items', [])
+
+    # if not events:    
+    #     print('No upcoming events found.')
+    # for event in events:
+    #     pass
+    # print(events.getvalues)
 
 def create_event(title, date, time):        
     event = {}
@@ -71,19 +81,24 @@ def create_event(title, date, time):
     return event
     
 def insert_event(service, event):
-    event = service.events().insert(calendarId='primary', body=event).execute()
+    event = service.events().insert(calendarId='c_9d24nskh8p4rlsn3uak947rjjg@group.calendar.google.com', body=event).execute()
     event_dict.update({event['summary']:event})
 
 
 
 def delete_event(service, event):
     event_id = event['id']
+    print(event_dict)
     service.events().delete(calendarId='primary', eventId=event_id).execute()
     event_dict.pop(event['summary'])
 
 
 def write_data(slots_dict, file):
     with open(file,'w') as f: json.dump(slots_dict,f)
+
+
+
+
 
 
 if __name__ == '__main__':

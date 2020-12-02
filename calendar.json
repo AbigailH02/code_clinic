@@ -1,0 +1,107 @@
+{
+    "kind": "calendar#events",
+    "etag": "\"p33ge1uu1tuneq0g\"",
+    "summary": "new one",
+    "description": "k",
+    "updated": "2020-12-02T08:24:19.196Z",
+    "timeZone": "Africa/Johannesburg",
+    "accessRole": "owner",
+    "defaultReminders": [],
+    "items": [
+        {
+            "kind": "calendar#event",
+            "etag": "\"3213660974242000\"",
+            "id": "p492qfv3phudgvtuqdipbkm014",
+            "status": "confirmed",
+            "htmlLink": "https://www.google.com/calendar/event?eid=cDQ5MnFmdjNwaHVkZ3Z0dXFkaXBia20wMTQgY185ZDI0bnNraDhwNHJsc24zdWFrOTQ3cmpqZ0Bn",
+            "created": "2020-12-01T13:48:07.000Z",
+            "updated": "2020-12-01T13:48:07.121Z",
+            "summary": "2020-1",
+            "creator": {
+                "email": "tradebe@student.wethinkcode.co.za"
+            },
+            "organizer": {
+                "email": "c_9d24nskh8p4rlsn3uak947rjjg@group.calendar.google.com",
+                "displayName": "new one",
+                "self": true
+            },
+            "start": {
+                "dateTime": "2020-12-02T16:00:00+02:00"
+            },
+            "end": {
+                "dateTime": "2020-12-02T16:30:00+02:00"
+            },
+            "iCalUID": "p492qfv3phudgvtuqdipbkm014@google.com",
+            "sequence": 0,
+            "reminders": {
+                "useDefault": true
+            }
+        },
+        {
+            "kind": "calendar#event",
+            "etag": "\"3213794918392000\"",
+            "id": "6011r2j9k6spdmf19se9lrs5oo",
+            "status": "confirmed",
+            "htmlLink": "https://www.google.com/calendar/event?eid=NjAxMXIyajlrNnNwZG1mMTlzZTlscnM1b28gY185ZDI0bnNraDhwNHJsc24zdWFrOTQ3cmpqZ0Bn",
+            "created": "2020-12-02T08:22:49.000Z",
+            "updated": "2020-12-02T08:24:19.196Z",
+            "summary": "tll",
+            "creator": {
+                "email": "tradebe@student.wethinkcode.co.za"
+            },
+            "organizer": {
+                "email": "c_9d24nskh8p4rlsn3uak947rjjg@group.calendar.google.com",
+                "displayName": "new one",
+                "self": true
+            },
+            "start": {
+                "dateTime": "2020-12-02T17:30:00+02:00"
+            },
+            "end": {
+                "dateTime": "2020-12-02T18:30:00+02:00"
+            },
+            "iCalUID": "6011r2j9k6spdmf19se9lrs5oo@google.com",
+            "sequence": 0,
+            "attendees": [
+                {
+                    "email": "tmngomez@student.wethinkcode.co.za",
+                    "responseStatus": "accepted"
+                }
+            ],
+            "hangoutLink": "https://meet.google.com/osk-ymks-ros",
+            "conferenceData": {
+                "entryPoints": [
+                    {
+                        "entryPointType": "video",
+                        "uri": "https://meet.google.com/osk-ymks-ros",
+                        "label": "meet.google.com/osk-ymks-ros"
+                    },
+                    {
+                        "entryPointType": "more",
+                        "uri": "https://tel.meet/osk-ymks-ros?pin=1162430354833",
+                        "pin": "1162430354833"
+                    },
+                    {
+                        "regionCode": "ZA",
+                        "entryPointType": "phone",
+                        "uri": "tel:+27-10-823-0664",
+                        "label": "+27 10 823 0664",
+                        "pin": "660308332"
+                    }
+                ],
+                "conferenceSolution": {
+                    "key": {
+                        "type": "hangoutsMeet"
+                    },
+                    "name": "Google Meet",
+                    "iconUri": "https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v6/web-512dp/logo_meet_2020q4_color_2x_web_512dp.png"
+                },
+                "conferenceId": "osk-ymks-ros",
+                "signature": "AGkP/s01cjJaLDI4ORn24IugfJ3V"
+            },
+            "reminders": {
+                "useDefault": true
+            }
+        }
+    ]
+}

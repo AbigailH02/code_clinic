@@ -34,6 +34,6 @@ else:#checking if token exists and it's still valid
         print('\n\t\tUser not logged in')
         print('\t\tcommand to login:     clinic -login\n')
     else:
-        print('Welcome to code')
+        print('Welcome to Code Clinic')
         auth.get_event()
 

@@ -52,8 +52,8 @@ def register_user():
 
     if password == pass_comfirm:
         print(f"Welcome to Code Clinic {user}")
-        with open('secret.json') as json_file:
-                data = json.load(json_file)
+        with open('.secret.json') as json_file:
+            data = json.load(json_file)
         user_details = {
         "user_name" : user,
         "password" : password   
@@ -61,11 +61,11 @@ def register_user():
         temp = data['user_infomation']
         temp.append(user_details)
 
-        with open('secret.json','w') as f: 
+        with open('.secret.json','w') as f: 
             json.dump(data, f, indent=4)
 
         flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', SCOPES)
+                    '.credentials.json', SCOPES)
         creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:

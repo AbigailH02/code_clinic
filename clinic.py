@@ -56,12 +56,16 @@ elif args.create_event:
     event = cal.create_event(title,date,time)
     print('Event has been created')
     cal.insert_event(service, event)
-    # print(event)
+    print(event)
 
-elif args.delete_event:
-    # service,now = cal.main()
-    event = cal.get_event(service, now)
-    cal.delete_event(service,event)
+
+
+
+
+# elif args.delete_event:
+#     # service,now = cal.main()
+#     event = cal.get_event(service, now)
+#     cal.delete_event(service,event)
 
 
 # else:
