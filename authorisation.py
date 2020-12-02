@@ -157,14 +157,14 @@ def user_login():
         "password" : password   
     }
 
-    if token_exists() and creds.expired:
-        print("Refreshing the login token...")
-        creds.refresh(Request())
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
    
     if user_details == json_object:
         print("Sucessful Login")
+        if token_exists() and creds.expired:
+            print("Refreshing the login token...")
+            creds.refresh(Request())
+            with open('token.pickle', 'wb') as token:
+                pickle.dump(creds, token)
     else:
         print("Incorrect username or password")
 
