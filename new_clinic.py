@@ -23,9 +23,9 @@ args = parser.parse_args()
 
 #checking and executing the commandline arguments
 if args.register:
-    if not auth.token_exists:
+    if not auth.token_exists():
         auth.register_user()
-    elif auth.token_exists and auth.creds_expired:
+    elif auth.token_exists() and auth.creds_expired():
         user = auth.get_user()
         print(f"You are registered as {user}")
         print("Use this command to login:    clinic -login")
@@ -35,14 +35,14 @@ if args.register:
 elif args.login:
     if auth.token_exists() and not auth.token_valid():
         auth.user_login()
-    elif not auth.token_exists:
+    elif not auth.token_exists():
         print(f"\n\t\tUser is not registered\
         \n\n\tcommand to register:   clinic -register\n")
     else:
         print(f"You are logged in as {auth.get_user()}")
         
 elif args.deregister:
-    if auth.token_exists:
+    if auth.token_exists():
         os.remove("token.pickle")
         print("Deregistration successful.")
     else:
