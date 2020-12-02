@@ -9,6 +9,7 @@ from google.auth.transport.requests import Request
 import datetime
 from googleapiclient.discovery import build
 import time
+from unittest import mock
 #we'll add deregister to delete the token
 
 creds = None
@@ -23,14 +24,25 @@ def token_exists():
     return False
 
 
+def creds_expired():
+    global creds
+    
+    if creds.expired:
+        print("creds expired")
+        return True
+    return False
+
+
+
 def get_creds():
     """gets credentials from the token"""
     global creds
 
-    if os.path.exists('token.pickle'):
+    if os.path.exists('token.pickle') and not token_expired():
         with open('token.pickle', 'rb') as token:
             creds = pickle.load(token)
-            # creds.refresh(Request())
+    # elif token_exists() and token_expired():
+    #     creds.refresh(Request())
     return creds
 
 
@@ -49,15 +61,15 @@ def token_expired():
         it is expired"""
 
     created = os.path.getctime("token.pickle")
-    print("\ttoken Created: %s" % time.ctime(created))
+    
     token_exp = created + 3600
     now = time.time()
 
     if token_exp < now:
-        print('token expired')
+        # print('token expired')
         return True
     else:
-        print(f"\n\ttoken will expire on {time.ctime(token_exp)}")#token expires after 3600seconds(1hour)
+        # print(f"\n\ttoken will expire on {time.ctime(token_exp)}")#token expires after 3600seconds(1hour)
         return False
 
 
@@ -73,16 +85,20 @@ def register_user():
     if password == pass_comfirm:
         print(f"Welcome to Code Clinic {user}")
         with open('secret.json') as json_file:
-                data = json.load(json_file)
+            data = json.load(json_file)
         user_details = {
         "user_name" : user,
         "password" : password   
         }
-        temp = data['user_infomation']
-        temp.append(user_details)
 
+        json_object = json.dumps(user_details, indent = 4)
         with open('secret.json','w') as f: 
-            json.dump(data, f, indent=4)
+            f.write(json_object)
+        # temp = data['user_infomation']
+        # temp = user_details
+
+        # with open('secret.json','w') as f: 
+        #     json.dump(data, f, indent=4)
 
         flow = InstalledAppFlow.from_client_secrets_file(
                     'credentials.json', SCOPES)
@@ -125,8 +141,8 @@ def build_calendar():
 def user_login():
     """"logs in an existing user"""
 
-    #global creds
-    creds = get_creds().refresh(Request())
+    global creds
+    creds = get_creds()
 
     print("Please enter your username and password to login")
     user = getpass.getuser()
@@ -141,30 +157,20 @@ def user_login():
         "password" : password   
     }
 
-    if token_exists() and token_expired():
-        os.remove("token.pickle")
-
-        flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', SCOPES)
-        creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
+    if token_exists() and creds.expired:
+        print("Refreshing the login token...")
+        creds.refresh(Request())
         with open('token.pickle', 'wb') as token:
-                pickle.dump(creds, token)
-
-    if user_details in json_object["user_infomation"]:
+            pickle.dump(creds, token)
+   
+    if user_details == json_object:
         print("Sucessful Login")
     else:
         print("Incorrect username or password")
 
+
 creds = get_creds()
-print(creds.expired)
-print(creds)
-
-creds.refresh(Request())
-print(creds)
-created = os.path.getctime("token.pickle")
-# modified = os.path.getmtime("token.pickle")
-print("\ttoken Created: %s" % time.ctime(created))
-#print("\ttoken Created: %s" % time.ctime(mtime("token.pickle")))
-
-print(creds.expired)
+# user_login()
+# (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat('token.pickle')
+# print("\ttoken Created: %s" % time.ctime(ctime))
+# print(f"\tmodified time: {time.ctime(mtime)}")

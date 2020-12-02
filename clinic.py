@@ -64,8 +64,5 @@ elif args.delete_event:
     cal.delete_event(service,event)
 
 
-# else:
-#     print("You")
-
 if __name__ == '__main__':
     pass
