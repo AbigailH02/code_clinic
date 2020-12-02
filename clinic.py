@@ -1,6 +1,6 @@
 import login as log
-import args as a
-import token
+# import args as a
+# import token
 
 def show_commands():
     print("""
@@ -18,13 +18,12 @@ def show_commands():
 def run():
     show_commands()
     user_input = input(">> ")
-    while(1):
 
-        if user_input == 'clinic -register' or user_input == 'clinic -r':
-            log.registration()
-            token.get_token()
-        elif user_input == 'clinic -login' or user_input == 'clinic -l':
-            log.login()
+    if user_input == 'clinic -register' or user_input == 'clinic -r':
+        log.registration()
+        # token.get_token()
+    elif user_input == 'clinic -login' or user_input == 'clinic -l':
+        log.login()
         
         
 
