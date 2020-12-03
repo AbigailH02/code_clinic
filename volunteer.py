@@ -1,9 +1,7 @@
-import pickle, datetime, getpass
+import pickle, datetime, getpass, json
 from googleapiclient.discovery import build
 
 def create_event(summary, start, duration):
-
-#
     event = {
         'summary':summary,
         'start': {
@@ -12,11 +10,10 @@ def create_event(summary, start, duration):
         'end':{
             'dateTime': duration
         },
-        'attendees':{
-            'email': f"{getpass.getuser()}@student.wethinkcode.co.za"
-        }
+        'attendees':[
+            {'email': f"{getpass.getuser()}@student.wethinkcode.co.za"}
+        ]
     }
-    print(event)
     return event 
 
 
@@ -56,19 +53,55 @@ def open_slots():
     duration = f"{end.date()}T{end.time()}+02:00"
 
     #NOTE: Needs changes
-    event_list = []
+    event_list = load_data()
 
     for amm in range(int(slots)):
         event = insert_event(service, create_event(summary, start, duration))
         begin += datetime.timedelta(minutes=60)
         end += datetime.timedelta(minutes=60)
-        event_list.append(event)
+        event_list['events'].append({getpass.getuser()+'-'+summary+'-'+str(begin.date()) +'-'+str(begin.time()):event})
         duration = f"{end.date()}T{end.time()}+02:00"
         start = f"{begin.date()}T{begin.time()}+02:00"
-        print(start)
     return event_list
+
 
 def open_slot():
     print("Open Slot")
     event_list = open_slots()
+    save_data(event_list)
     return event_list
+
+
+def save_data(event_list):
+    with open('event_list.json', 'w') as file:
+        json.dump(event_list, file, indent=4)
+
+
+def load_data():
+    with open('event_list.json', 'r') as file:
+        event_list = json.load(file)
+    return event_list
+
+
+def remove_event(event_id): 
+    service = get_service()
+    service.events().delete(calendarId='primary', eventId=event_id).execute()
+
+
+def cancel_slot():
+    print("Please select a slot to cancel:\n")
+    events = load_data()
+    ava_delete = []
+    for item in events['events']:
+        for key,items in item.items():
+            if getpass.getuser() in key:
+                if len(items['attendees']) == 1:
+                    ava_delete.append(key)
+    for item in range(len(ava_delete)):
+        print(f"\t{item + 1}:{ava_delete[item]}")
+    cancel = int(input('\n > ')) -1
+    event_id = events['events'][cancel][ava_delete[cancel]]['id']
+    remove_event(event_id)
+    events['events'].pop(cancel)
+    save_data(events)
+    

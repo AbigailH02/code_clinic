@@ -1,0 +1,41 @@
+{
+    "events": [
+        {
+            "ahlalele-book-2020-12-04-11:00:00": {
+                "kind": "calendar#event",
+                "etag": "\"3213984133882000\"",
+                "id": "1e015t1kbasac3vk20b5jea814",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=MWUwMTV0MWtiYXNhYzN2azIwYjVqZWE4MTQgYWplbmtpbnNAc3R1ZGVudC53ZXRoaW5rY29kZS5jby56YQ",
+                "created": "2020-12-03T10:41:06.000Z",
+                "updated": "2020-12-03T10:41:06.941Z",
+                "summary": "book",
+                "creator": {
+                    "email": "ajenkins@student.wethinkcode.co.za",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ajenkins@student.wethinkcode.co.za",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2020-12-04T10:00:00+02:00"
+                },
+                "end": {
+                    "dateTime": "2020-12-04T10:30:00+02:00"
+                },
+                "iCalUID": "1e015t1kbasac3vk20b5jea814@google.com",
+                "sequence": 0,
+                "attendees": [
+                    {
+                        "email": "ahlalele@student.wethinkcode.co.za",
+                        "responseStatus": "needsAction"
+                    }
+                ],
+                "reminders": {
+                    "useDefault": true
+                }
+            }
+        }
+    ]
+}
