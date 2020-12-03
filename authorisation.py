@@ -21,6 +21,15 @@ def token_exists():
     return False
 
 
+def creds_expired():
+    global creds
+    
+    if creds.expired:
+        print("creds expired")
+        return True
+    return False
+
+    
 def get_creds():
     """gets credentials from the token"""
     global creds
